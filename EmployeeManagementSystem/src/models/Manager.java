@@ -28,5 +28,9 @@ public class Manager extends Employee  {
     public String toString() {
         return super.toString()+", Title: Manager";
     }
+    @Override
+    public String getWorkRole() {
+        return "Manager";
+    }
     
 }

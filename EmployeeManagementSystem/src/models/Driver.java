@@ -14,6 +14,7 @@ public class Driver extends Employee {
         count++;
     }
     
+    
     @Override
     public String getTitle() {
         return this.title;
@@ -27,6 +28,11 @@ public class Driver extends Employee {
     @Override
     public String toString() {
         return super.toString()+", Title: Driver";
+    }
+
+    @Override
+    public String getWorkRole() {
+        return "Driver";
     }
     
 }

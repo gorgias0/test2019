@@ -27,4 +27,9 @@ public class DairyWorker extends Employee {
     public String toString() {
         return super.toString()+", Title: DairyWorker";
     }
+
+    @Override
+    public String getWorkRole() {
+        return "DairyWorker";
+    }
 }

@@ -25,10 +25,10 @@ public class Main {
     public static void main(String[] args) {
         createTestData();
         
-        List<Employee> test = EMPLOYEES.findBySalary(27000, 30000);
-        System.out.println("Salaries between 27 and 30");
-        test.forEach(e -> System.out.print(e.getSalary()+" : "));
-        System.out.println("");
+//        List<Employee> test = EMPLOYEES.findBySalary(27000, 30000);
+//        System.out.println("Salaries between 27 and 30");
+//        test.forEach(e -> System.out.print(e.getSalary()+" : "));
+//        System.out.println("");
         
         while (true) {
             showMainMenu();

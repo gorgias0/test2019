@@ -66,6 +66,8 @@ public abstract class Employee implements Comparable<Employee> {
     public double getBonus(){
         return salary + workyears*100;
     }
+    
+    public abstract String getWorkRole();
 
     @Override
     public String toString() {

@@ -1,6 +1,9 @@
 package ui;
 
 import java.util.DoubleSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import models.*;
 import utilities.BetterScanner;
@@ -19,8 +22,6 @@ public class StatisticsUI {
         StatisticsUI.employees = employees;
         StatisticsUI.scanner = scanner;
     }
-    
-    private StatisticsUI(){} // no instance without arguments allowed
     
     public void showStatisticsMenu() {
         while (true) {
@@ -44,52 +45,36 @@ public class StatisticsUI {
     }
     
     private void showMediumSalary(){
-        double sum = 0;
-        double managers = 0;
-        double drivers = 0;
-        double dairyworkers = 0;
-        double warehouseworkers = 0;
-        for(Employee e: employees.getValues()) {
-            sum += e.getSalary();
-            if (e instanceof Manager)
-                managers += e.getSalary();
-            if(e instanceof Driver)
-                drivers += e.getSalary();
-            if(e instanceof DairyWorker)
-                dairyworkers += e.getSalary();
-            if(e instanceof WarehouseWorker)
-                warehouseworkers += e.getSalary();
-        }
-        System.out.println("Medium salary for:");
-        System.out.println("Whole Company:    " + Main.twoDecimals(sum / employees.size()));
-        System.out.println("Managers:         " + Main.twoDecimals(managers / Manager.count));
-        System.out.println("Drivers:          " + Main.twoDecimals(drivers / Driver.count));
-        System.out.println("Dairyworkers:     " + Main.twoDecimals(dairyworkers / DairyWorker.count));
-        System.out.println("Warehouseworkers: " + Main.twoDecimals(warehouseworkers / WarehouseWorker.count));
-    }
-    
-    private void showGenderStatistics(){
-        int male = 0;
-        int female = 0;
-        int other = 0;
+        Map<String, List<Employee>> employeesByWorkRole =  employees.getValues().stream().collect(Collectors.groupingBy(Employee::getWorkRole));
+        DoubleSummaryStatistics sum = employees.getValues().stream().mapToDouble(Employee::getSalary).summaryStatistics();
         
-        for(Employee e: employees.getValues()) {
-            switch (e.getGender()) {
-                case MALE: male++; break;
-                case FEMALE: female++; break;
-                case OTHER: other++; break;
-            }
+        System.out.println("Total monthly salaryexpenses in company: " + Main.twoDecimals(sum.getSum()));
+        System.out.println("Average salary in company: " + Main.twoDecimals(sum.getAverage()));
+        
+        System.out.println("\nAverage salary per workrole:");
+        for (String s : employeesByWorkRole.keySet()) {
+            List<Employee> l = employeesByWorkRole.get(s);
+            Double avg =  l.stream().mapToDouble(Employee::getSalary).average().getAsDouble();
+            System.out.println(s + ": " + Main.twoDecimals(avg));
         }
-        System.out.println("Gender statistics in company:");
-        System.out.println("Male: "+male+" Female: "+female+" Other: "+other);
-        double maleP = male / (double) employees.size() * 100;
-        double femaleP = female / (double) employees.size() * 100;
-        double otherP = other / (double) employees.size() * 100;
-        System.out.println("Male: " + Main.twoDecimals(maleP) +"%");
-        System.out.println("Female: " + Main.twoDecimals(femaleP) +"%");
-        System.out.println("Other: " + Main.twoDecimals(otherP) +"%");
+        System.out.println("\n");
     }
     
+    
+    private void showGenderStatistics() {
+        int tot = employees.size();
+        Map<Gender, List<Employee>> employeesByGender =  employees.getValues().stream().collect(Collectors.groupingBy(Employee::getGender));
+        int male = employeesByGender.get(Gender.MALE).size();
+        int female = employeesByGender.get(Gender.FEMALE).size();
+        int other = employeesByGender.get(Gender.OTHER).size();
+        
+        System.out.println("Gender statistics in company:");
+        System.out.println("Male: " + male + " = " + Main.twoDecimals((double) male / tot * 100) + "%");
+        System.out.println("Female: " + female + " = " + Main.twoDecimals((double) female / tot * 100) + "%");
+        System.out.println("Other: " + other + " = " + Main.twoDecimals((double) other / tot * 100) + "%\n");
+    }
+    
+   
     private void showMedianSalary() {
         DoubleStream salaries = employees.getValues().stream().mapToDouble(Employee::getSalary).sorted();
         int size = employees.size();
@@ -108,8 +93,6 @@ public class StatisticsUI {
         System.out.println("Lowest salarie in company: " + Main.twoDecimals(sum.getMin()));
         System.out.println("Medium salarie in company: " + Main.twoDecimals(sum.getAverage()));
         System.out.println("Total monthly cost for salaries: " + Main.twoDecimals(sum.getSum())+"\n");
-        
-        //System.out.println("Total monthly cost for salaries: " + salaries.reduce(0d, (a,b) -> a+b));
     }
     
   

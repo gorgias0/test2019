@@ -29,11 +29,9 @@ public final class EmployeeUI {
         EmployeeUI.scanner = scanner;
     }
     
-    private EmployeeUI(){} // no instance without arguments allowed
-
     
     public void showAllEmployees() {
-        employees.getValues().forEach(employee -> System.out.println(employee));
+        employees.getValues().forEach(System.out::println);
     }
    
     
@@ -53,18 +51,17 @@ public final class EmployeeUI {
             break;
             default: System.out.println("Not a valid option. Default sort order is used.");
         }
-        emplist.forEach(employee -> System.out.println(employee));
+        emplist.forEach(System.out::println);
     }    
     
     public void showAllBonuses() {
-        employees.getValues().forEach(employee ->  {
-            System.out.println(Main.twoDecimals(employee.getBonus()));
-        });
+        employees.getValues().forEach(employee -> System.out.println(Main.twoDecimals(employee.getBonus())));
     }
     
     public void printSearchResults(List<Employee> list) {
         System.out.println("Number of Employees found = " + list.size());
-        list.forEach(employee -> System.out.println(employee));
+        list.forEach(System.out::println);
+        System.out.println("");
     }
     
     public void searchByName() {

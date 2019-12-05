@@ -30,4 +30,9 @@ public class WarehouseWorker extends Employee {
         return super.toString()+", Title: WarehouseWorker";
     }
     
+    @Override
+    public String getWorkRole() {
+        return "WarehouseWorker";
+    }
+    
 }
