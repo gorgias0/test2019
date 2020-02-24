@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="musicdatabase" epkg="domain" v="4.9" rws="_158115224457926" Pws="_158115224457926" cws="_158115224457926" persistenceUnitName="DEFAULT_PU" pp="E" sm="false" xs="false" id="_158115224457525" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="ArtistPK" abs="false" class="Artist" v="true" jbn="false" xre="false" m="false" rootElement="_158115224457525" id="_158115225028327">
+        <jpa:ath>Daniel Lindkvist</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="name" id="_158115228817030">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_158115233741731" connected-attribute-id="_158115411737549" v="true" xvt="" name="medias" id="_158115411737650">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_158115225032228">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:bv>
+                    <jpa:nn/>
+                </jpa:bv>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Artist.findAll">
+            <jpa:query>Select e from Artist e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Artist.findByName">
+            <jpa:query>Select a from Artist a where a.name=:name</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="MediaPK" abs="false" class="Media" v="true" jbn="false" xre="false" m="false" rootElement="_158115224457525" id="_158115233741731">
+        <jpa:ath>Daniel Lindkvist</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="title" id="_158115239844038">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="Integer" v="true" xvt="" name="year" id="_158115240214039">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="int" v="true" xvt="" name="mediacondition" dv="0" id="_158115245881140">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:bv>
+                    <jpa:mi v="1"/>
+                    <jpa:ma v="5"/>
+                </jpa:bv>
+            </jpa:basic>
+            <jpa:basic attribute-type="int" v="true" xvt="" name="rating" id="_158115385122942">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:bv>
+                    <jpa:mi v="1"/>
+                    <jpa:ma v="5"/>
+                </jpa:bv>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalDate" v="true" xvt="" name="cleaning_date" id="_158115388742543">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_158115225028327" connected-attribute-id="_158115411737650" v="true" xvt="" name="artist" id="_158115411737549">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_158115236762534" v="true" xvt="" name="mediatype" id="_158115423293154">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_158115233741832">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:bv>
+                    <jpa:nn/>
+                </jpa:bv>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Media.findAll">
+            <jpa:query>Select e from Media e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findByTitle">
+            <jpa:query>Select m from Media m where m.title=:title</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findByYear">
+            <jpa:query>Select m from Media m where m.year=:year</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findByMediacondition">
+            <jpa:query>Select m from Media m where m.mediacondition=:mediacondition</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findBySleevecondition">
+            <jpa:query>Select m from Media m where m.sleevecondition=:sleevecondition</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findByRating">
+            <jpa:query>Select m from Media m where m.rating=:rating</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Media.findByCleaning_date">
+            <jpa:query>Select m from Media m where m.cleaning_date=:cleaning_date</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="MediatypePK" abs="false" class="Mediatype" v="true" jbn="false" xre="false" m="false" rootElement="_158115224457525" id="_158115236762534">
+        <jpa:ath>Daniel Lindkvist</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="type" id="_158115238034237">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_158115236762535">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:bv>
+                    <jpa:nn/>
+                </jpa:bv>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Mediatype.findAll">
+            <jpa:query>Select e from Mediatype e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Mediatype.findByType">
+            <jpa:query>Select m from Mediatype m where m.type=:type</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_158115224457926">
+            <i ref="_158115233741731" x="501" y="80"/>
+            <i ref="_158115225028327" x="226" y="80"/>
+            <i ref="_158115236762534" x="834" y="80"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
