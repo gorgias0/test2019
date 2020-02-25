@@ -101,7 +101,7 @@ public class ArtistFrame extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jListArtists);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Ny Artist");
+        jButton3.setText("Ny");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -124,7 +124,7 @@ public class ArtistFrame extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 80, Short.MAX_VALUE)
+                        .addGap(0, 116, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))

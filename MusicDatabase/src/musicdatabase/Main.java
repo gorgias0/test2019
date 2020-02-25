@@ -18,9 +18,6 @@ public class Main {
         MainJFrame frame = new MainJFrame(dbm);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        //dbm.printArtist();
-        //dbm.testDeleteBobDylan();
-        //dbm.printArtistsByName();
     }
 
 }
