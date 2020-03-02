@@ -5,7 +5,6 @@
  */
 package gui;
 
-import java.awt.event.WindowEvent;
 import musicdatabase.DBManager;
 import domain.Artist;
 import java.util.List;
@@ -203,7 +202,8 @@ public class ArtistFrame extends javax.swing.JDialog {
         int index = jListArtists.getSelectedIndex();
         if (index < 0) return;
         selected = artists.get(jListArtists.getSelectedIndex());
-        if(JOptionPane.showConfirmDialog(this, "Vill du radera vald artist?","Radera?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        int nrMedias = selected.getMedias().size();
+        if(JOptionPane.showConfirmDialog(this, "Vill du radera vald artist och "+ nrMedias +" associerade media?","Radera?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             dbm.execute(selected, DBAction.remove);
             selected = null;
             populateList();

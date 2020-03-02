@@ -113,12 +113,12 @@ public class MediaDialog extends javax.swing.JDialog {
         jLabel2.setText("År");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Skick");
+        jLabel3.setText("Skick (1-5)");
 
         jTextFieldCondition.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Betyg");
+        jLabel4.setText("Betyg (1-5)");
 
         jTextFieldRating.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -164,9 +164,10 @@ public class MediaDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldYear, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCondition)
-                    .addComponent(jTextFieldRating)
-                    .addComponent(jTextFieldTitle))
+                    .addComponent(jTextFieldTitle)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jTextFieldRating, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCondition, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
@@ -177,7 +178,7 @@ public class MediaDialog extends javax.swing.JDialog {
                     .addComponent(jComboBoxMediaType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(277, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -226,6 +227,7 @@ public class MediaDialog extends javax.swing.JDialog {
             m.setId(selectedMedia.getId());
             db.execute(m, DBAction.update);
         } else {
+            m.getArtist().getMedias().add(m);
             db.execute(m, DBAction.add);
         }
         parent.addMedia(m);

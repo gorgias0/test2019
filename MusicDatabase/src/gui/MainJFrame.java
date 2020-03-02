@@ -7,10 +7,8 @@ package gui;
 
 import javax.swing.DefaultListModel;
 import musicdatabase.DBManager;
-import domain.Artist;
 import domain.Media;
 import java.awt.event.KeyEvent;
-import java.security.spec.KeySpec;
 import java.util.List;
 import javax.swing.JOptionPane;
 import musicdatabase.DBAction;
@@ -48,8 +46,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public void addMedia(Media m) {
         updateMediaList();
-//        DefaultListModel dm = (DefaultListModel) jListMedia.getModel();
-//        dm.addElement(m);
     }
 
     private MainJFrame() {
@@ -80,6 +76,11 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Music Database");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jListMedia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jListMedia.setModel(new javax.swing.AbstractListModel<String>() {
@@ -231,7 +232,6 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jListMediaValueChanged
 
     private void jButtonNewMediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewMediaActionPerformed
-        // TODO add your handling code here:
         MediaDialog md = new MediaDialog(db, this, rootPaneCheckingEnabled);
         md.setModal(true);
         md.setLocationRelativeTo(this);
@@ -254,6 +254,12 @@ public class MainJFrame extends javax.swing.JFrame {
             updateMediaList();
         }
     }
+    @Override
+    public void dispose() {
+        System.out.println("Stänger...");
+        db.close();
+        super.dispose();
+    }
     
     private void jListMediaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jListMediaKeyPressed
         Media m = medias.get(jListMedia.getSelectedIndex());
@@ -265,7 +271,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jListMediaKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -282,6 +288,10 @@ public class MainJFrame extends javax.swing.JFrame {
         md.setLocationRelativeTo(this);
         md.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        db.close();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

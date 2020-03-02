@@ -186,7 +186,9 @@ public class MediatypeDialog extends javax.swing.JDialog {
         Mediatype mt = mediatypes.get(jListMediatypes.getSelectedIndex());
         if (mt == null) return;
         if(JOptionPane.showConfirmDialog(this, "Vill du radera vald mediatyp?","Radera?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            db.execute(mt, DBAction.remove);
+            boolean b = db.execute(mt, DBAction.remove);
+            if (!b)
+                JOptionPane.showMessageDialog(this, "Det går inte att radera denna mediatyp så länge det finns associerade media.");
             populateList();
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
